@@ -1,0 +1,7 @@
+C:\Users\doug.wehmeyer\Documents\GitHub\DotNetMemoryManagementDemos\DotNetMemoryManagement\WeakReferences\bin\Debug\WeakReferences.exe.config
+C:\Users\doug.wehmeyer\Documents\GitHub\DotNetMemoryManagementDemos\DotNetMemoryManagement\WeakReferences\bin\Debug\WeakReferences.exe
+C:\Users\doug.wehmeyer\Documents\GitHub\DotNetMemoryManagementDemos\DotNetMemoryManagement\WeakReferences\bin\Debug\WeakReferences.pdb
+C:\Users\doug.wehmeyer\Documents\GitHub\DotNetMemoryManagementDemos\DotNetMemoryManagement\WeakReferences\obj\Debug\WeakReferences.csprojAssemblyReference.cache
+C:\Users\doug.wehmeyer\Documents\GitHub\DotNetMemoryManagementDemos\DotNetMemoryManagement\WeakReferences\obj\Debug\WeakReferences.csproj.CoreCompileInputs.cache
+C:\Users\doug.wehmeyer\Documents\GitHub\DotNetMemoryManagementDemos\DotNetMemoryManagement\WeakReferences\obj\Debug\WeakReferences.exe
+C:\Users\doug.wehmeyer\Documents\GitHub\DotNetMemoryManagementDemos\DotNetMemoryManagement\WeakReferences\obj\Debug\WeakReferences.pdb

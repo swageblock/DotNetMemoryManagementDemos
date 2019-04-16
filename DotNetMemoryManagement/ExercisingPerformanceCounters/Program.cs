@@ -14,10 +14,11 @@ namespace ExercisingPerformanceCounters
 
         static void RunBigArrayDemo()
         {
-            var tasks = new List<Task>(20000);
+            int count = 20000;
+            var tasks = new List<Task>(count);
             Console.WriteLine("Creating some traffic for the BigArray Demo");
             Console.WriteLine("Thread large object Initialization Starting");
-            for (int i = 0; i < 20000; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (i == 1)
                 {
@@ -46,10 +47,10 @@ namespace ExercisingPerformanceCounters
                     }));
                 }
             }
-            Console.WriteLine("Thread large object Initialization Complete");
+            Console.WriteLine($"Thread large object Initialization Complete for {count} threads");
 
             Console.WriteLine($"Tasks allocated on GEN{GC.GetGeneration(tasks[0])}");
-            Console.WriteLine($"The highest generation is {0}", GC.MaxGeneration);
+            Console.WriteLine($"The highest generation is {GC.MaxGeneration}");
             foreach (var task in tasks)
             {
                 task.Start();
@@ -60,10 +61,11 @@ namespace ExercisingPerformanceCounters
         }
         static void RunNoBigArrayDemo()
         {
-            var tasks = new List<Task>(20000);
+            int count = 200000;
+            var tasks = new List<Task>(count);
             Console.WriteLine("Creating some traffic for the NOT-BigArray Demo");
             Console.WriteLine("Thread value object creation starting");
-            for (int i = 0; i < 20000; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (i == 1)
                 {
@@ -90,10 +92,10 @@ namespace ExercisingPerformanceCounters
                     }));
                 }
             }
-            Console.WriteLine("Thread value object creation Complete");
+            Console.WriteLine($"Thread value object creation Complete for {count} threads");
 
             Console.WriteLine($"Tasks allocated on GEN{GC.GetGeneration(tasks[0])}");
-            Console.WriteLine($"The highest generation is {0}", GC.MaxGeneration);
+            Console.WriteLine($"The highest generation is {GC.MaxGeneration}" );
             foreach (var task in tasks)
             {
                 task.Start();
@@ -111,35 +113,20 @@ namespace ExercisingPerformanceCounters
 
         static void Main(string[] args)
         {
-            SimpleAllocation();
             Console.WriteLine("Press any key to start Warmup of the GC Gens");
             Console.ReadLine();
             WarmUp();
 
             RunNoBigArrayDemo();
+            Console.WriteLine();
+            Console.WriteLine("First Run Completed.  Press Any Key to continue...");
+            Console.WriteLine();
+            Console.ReadLine();
             RunBigArrayDemo();
             
             Console.ReadLine();
         }
-
-        private static void SimpleAllocation()
-        {
-            Console.WriteLine("Demonstrating a heap allocation for a 'SOH' object");
-            var h = new NoBigSampleObject();
-            h.c.BigArray[0] = h.c.BigArray[0] + 1.0;
-            Console.WriteLine($"h is on the GEN {GC.GetGeneration(h)}");
-            Console.WriteLine($"'h.c' is on the GEN {GC.GetGeneration(h.c)}");
-            //
-            Console.WriteLine($"'h.c.BigArray' is on the GEN {GC.GetGeneration(h.c.BigArray)}");
-            Console.WriteLine();
-            Console.WriteLine("Demonstrating a heap allocation for a 'LOH' object");
-            var b = new SampleObject();
-            b.c.BigArray[0] = b.c.BigArray[0] + 1.0;
-            Console.WriteLine($"b is on the GEN {GC.GetGeneration(b)}");
-            Console.WriteLine($"'b.c' is on the GEN {GC.GetGeneration(b.c)}");
-            Console.WriteLine($"'h.c.BigArray' is on the GEN {GC.GetGeneration(b.c.BigArray)}");
-            //
-        }
+        
 
         private static void WarmUp()
         {
