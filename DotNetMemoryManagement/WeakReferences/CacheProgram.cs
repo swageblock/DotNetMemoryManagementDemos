@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeakReferences
 {
-    class Program
+    class CacheProgram
     {
         static void Main(string[] args)
         {
@@ -43,7 +43,7 @@ namespace WeakReferences
             {
                 var a = _theCache.GetWeakItem((int)state);
                 Person p;
-                Console.Write(!a.TryGetTarget(out p) ? "-" : ".");
+                Console.Write(!a.TryGetTarget(out p) ? ":" : ".");
             };
             Action<object> strongAction = (object state) =>
             {
@@ -64,7 +64,7 @@ namespace WeakReferences
             }
 
 
-            Console.Write("Starting tasks a '.' indicates a hit and misses are indicated by '-'");
+            Console.Write("Starting tasks a '.' indicates a hit and misses are indicated by ':'");
             foreach (var task in tasks)
             {
                 task.Start();

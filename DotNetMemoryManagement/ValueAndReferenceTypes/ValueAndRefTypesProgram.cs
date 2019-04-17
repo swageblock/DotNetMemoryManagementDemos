@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ValueAndReferenceTypes
 {
-    class Program
+    class ValueAndRefTypesProgram
     {
         class SimpleWrapper
         {
@@ -19,17 +19,26 @@ namespace ValueAndReferenceTypes
             int a = 7;
             int b = a;
             b = 9;
+            //**************************************************************What Should Print??
             Console.WriteLine($"The value of a and b are: {a} - {b}");
 
             Console.WriteLine("Assigning Values to wrapped objects wrapping int values");
             SimpleWrapper c = new SimpleWrapper() { value = 7 };
             SimpleWrapper d = c;
             d.value = 9;
+            //**************************************************************What Should Print??
             Console.WriteLine($"The value of c.value and d.value are: {c.value} - {d.value}");
 
             Console.ReadLine();
         }
 
+       
+
+        static void Main(string[] args)
+        {
+            RunOne();
+           // RunTwo();
+        }
         struct SimpleStruct
         {
             public int value;
@@ -41,21 +50,17 @@ namespace ValueAndReferenceTypes
             int a = 7;
             int b = int.Parse(a.ToString());
             b = 9;
+            //**************************************************************What Should Print??
             Console.WriteLine($"The value of a and b are: {a} - {b}");
 
             Console.WriteLine("Assigning Values to wrapped struct wrapping int values");
             SimpleStruct c = new SimpleStruct() { value = 7 };
             SimpleStruct d = c;
             d.value = 9;
+            //**************************************************************What Should Print??
             Console.WriteLine($"The value of c.value and d.value are: {c.value} - {d.value}");
 
             Console.ReadLine();
-        }
-
-        static void Main(string[] args)
-        {
-            RunOne();
-           // RunTwo();
         }
     }
 }

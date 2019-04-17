@@ -4,17 +4,35 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 
 namespace ExercisingPerformanceCounters
 {
-    class Program
+    class PerfCounterProgram
     {
+        static void Main(string[] args)
+        {
+            //Console.WriteLine("Press any key to start Warmup of the GC Gens");
+            //Console.ReadLine();
+            //WarmUp();
+
+            Console.WriteLine("Ready to start the first test");
+            Console.ReadLine();
+            RunNoBigArrayDemo();
+            Console.WriteLine();
+            Console.WriteLine("First Run Completed.  Press Any Key to continue...");
+            
+            Console.ReadLine();
+            RunBigArrayDemo();
+
+            Console.ReadLine();
+        }
 
         static void RunBigArrayDemo()
         {
-            int count = 20000;
+            int count = 90000;
             var tasks = new List<Task>(count);
             Console.WriteLine("Creating some traffic for the BigArray Demo");
             Console.WriteLine("Thread large object Initialization Starting");
@@ -44,12 +62,12 @@ namespace ExercisingPerformanceCounters
                         var e = new double[86000];
                         var h = new SampleObject();
                         h.c.BigArray[0] = h.c.BigArray[0] + 1.0;
+                        //Thread.Sleep(2000);
                     }));
                 }
             }
             Console.WriteLine($"Thread large object Initialization Complete for {count} threads");
-
-            Console.WriteLine($"Tasks allocated on GEN{GC.GetGeneration(tasks[0])}");
+            
             Console.WriteLine($"The highest generation is {GC.MaxGeneration}");
             foreach (var task in tasks)
             {
@@ -61,7 +79,7 @@ namespace ExercisingPerformanceCounters
         }
         static void RunNoBigArrayDemo()
         {
-            int count = 200000;
+            int count = 990000;
             var tasks = new List<Task>(count);
             Console.WriteLine("Creating some traffic for the NOT-BigArray Demo");
             Console.WriteLine("Thread value object creation starting");
@@ -89,13 +107,14 @@ namespace ExercisingPerformanceCounters
                         var d = new int[1] { 7 };
                         var h = new NoBigSampleObject();
                         h.c.BigArray[0] = h.c.BigArray[0] + 1.0;
+                        //Thread.Sleep(2000);
                     }));
                 }
             }
             Console.WriteLine($"Thread value object creation Complete for {count} threads");
-
-            Console.WriteLine($"Tasks allocated on GEN{GC.GetGeneration(tasks[0])}");
+            
             Console.WriteLine($"The highest generation is {GC.MaxGeneration}" );
+
             foreach (var task in tasks)
             {
                 task.Start();
@@ -111,21 +130,7 @@ namespace ExercisingPerformanceCounters
             Console.ReadLine();
         }
 
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Press any key to start Warmup of the GC Gens");
-            Console.ReadLine();
-            WarmUp();
-
-            RunNoBigArrayDemo();
-            Console.WriteLine();
-            Console.WriteLine("First Run Completed.  Press Any Key to continue...");
-            Console.WriteLine();
-            Console.ReadLine();
-            RunBigArrayDemo();
-            
-            Console.ReadLine();
-        }
+        
         
 
         private static void WarmUp()
